@@ -122,7 +122,8 @@ module Stomp
         @login = login
         @passcode = passcode
         @reliable = reliable
-        @reconnect_delay = reconnect_delay
+        @initial_reconnect_delay = reconnect_delay
+        @reconnect_delay = @initial_reconnect_delay
         @connect_headers = connect_headers
         @ssl = false
         @parameters = nil
@@ -163,6 +164,7 @@ module Stomp
       lp = _hdup(params)
       @parameters = refine_params(lp)
       @reliable =  @parameters[:reliable]
+      @initial_reconnect_delay = @parameters[:initial_reconnect_delay]
       @reconnect_delay = @parameters[:initial_reconnect_delay]
       @connect_headers = @parameters[:connect_headers]
       @parse_timeout =  @parameters[:parse_timeout]

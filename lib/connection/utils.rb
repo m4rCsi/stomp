@@ -118,6 +118,8 @@ module Stomp
             connect(used_socket)
             slog(:on_connected, log_params)
             @connection_attempts = 0
+            @reconnect_delay = @initial_reconnect_delay
+
           rescue
             @failure = $!
             used_socket = nil
