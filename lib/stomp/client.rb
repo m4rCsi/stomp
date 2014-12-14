@@ -99,19 +99,8 @@ module Stomp
     end
 
     def create_error_handler
-      client_thread = Thread.current
-
       @error_listener = lambda do |error|
-        exception = case error.body
-                      when /ResourceAllocationException/i
-                        Stomp::Error::ProducerFlowControlException.new(error)
-                      when /ProtocolException/i
-                        Stomp::Error::ProtocolException.new(error)
-                      else
-                        Stomp::Error::BrokerException.new(error)
-                    end
-
-        client_thread.raise exception
+        @logger.on_exception(error)
       end
     end
 

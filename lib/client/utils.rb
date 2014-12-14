@@ -171,7 +171,8 @@ module Stomp
     def start_listeners()
       create_listener_maps
 
-      @listener_thread = Thread.start do
+       @listener_thread = Thread.start do
+
         loop do
           message = @connection.receive
           # AMQ specific behavior

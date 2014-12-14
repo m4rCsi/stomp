@@ -7,6 +7,7 @@ module Stomp
       $stderr.print error_msg
     end
 
+    def on_exception(error); end
     def on_connecting(parms); end
     def on_connected(parms); end
     def on_connectfail(parms); end
